@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth'])->get('/user', function (Request $request) {
+Route::middleware(['auth'])->get('/me', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth')->group(function () {
+//    Route::get('/me', function (Request $request) {
+//        return $request->user();
+//    });
+    Route::get("/jobs", [ \App\Http\Controllers\JobsController::class, 'index' ])
+        ->name('jobsList');
 });
